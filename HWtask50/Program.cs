@@ -13,7 +13,7 @@ namespace GB.Task50
     {
         static void Main(string[] asgs)
         {
-            // Создаем массив размера 3х4 типа double
+            // Создаем массив размера 3х4 типа int
             int [,] matrix = new int [3, 4];
             // Создаем метод и заполняем массив случайными целыми числами
             FillMatrix(matrix);
