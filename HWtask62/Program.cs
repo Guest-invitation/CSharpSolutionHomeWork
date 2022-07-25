@@ -33,9 +33,9 @@ namespace GB.Task62
             int[,] matrixNew = new int[matrix.GetLength(0), matrix.GetLength(1)];
             matrixNew = GetSpiralSort(matrix, arraySort);
             Console.WriteLine();
+            Console.WriteLine("Спиральное заполнение матрицы!");
             PrintMatrix(matrixNew);
         }
-
         public static int[,] FillMatrix(int[,] matrixF)
         {
             for (int i = 0; i < matrixF.GetLength(0); i++)
@@ -47,7 +47,6 @@ namespace GB.Task62
             }
             return matrixF;
         }
-
         public static int[,] PrintMatrix(int[,] matrixP)
         {
             for (int i = 0; i < matrixP.GetLength(0); i++)
@@ -60,7 +59,6 @@ namespace GB.Task62
             }
             return matrixP;
         }
-
         public static int[] GetOneLineMatrix(int[,] matrix)
         {
             int[] array = new int[matrix.GetLength(0) * matrix.GetLength(1)];
@@ -75,7 +73,6 @@ namespace GB.Task62
             }
             return array;
         }
-
         public static int[] GetArraySort(int[] arrayS)
         {
             for (int i = 0; i < arrayS.Length; i++)
@@ -89,11 +86,9 @@ namespace GB.Task62
                         arrayS[j + 1] = change;
                     }
                 }
-
             }
             return arrayS;
         }
-
         public static int[,] GetTurn(int[,] matrixT)
         {
             int[,] matrixTurn = new int[matrixT.GetLength(0), matrixT.GetLength(1)];
@@ -114,54 +109,56 @@ namespace GB.Task62
             }
             return matrixS;
         }
-
         public static int[,] GetSpiralSort(int[,] matrixSS, int[] arraySS)
         {
             int[,] matrixSpiral = new int[matrixSS.GetLength(0), matrixSS.GetLength(1)];
-
-            for (int i = 0; i < matrixSpiral.GetLength(1); i++)
+            int sumCount = 0;
+            int countArrayElement = 0;
+            int countTurn = 0;
+            while (sumCount < arraySS.Length)
             {
-                matrixSpiral[0, i] = arraySS[i];
+                if (countTurn == 4)
+                {
+                    for (int i = 1; i < matrixSpiral.GetLength(1) - 1; i++)
+                    {
+                        int j = 1;
+                        matrixSpiral[j, i] = arraySS[i - 1 + sumCount];
+                        countArrayElement++;
+                    }
+                    sumCount = 0;
+                    sumCount = sumCount + countArrayElement;
+                    matrixSpiral = GetTurn(matrixSpiral);
+                    countTurn++;
+                }
+                if (countTurn >= 5 && countTurn <= 6)
+                {
+                    for (int i = 2; i < matrixSpiral.GetLength(1) - 1; i++)
+                    {
+                        int j = 1;
+                        matrixSpiral[j, i] = arraySS[i - 2 + sumCount];
+                        countArrayElement++;
+                    }
+                    sumCount = 0;
+                    sumCount = sumCount + countArrayElement;
+                    matrixSpiral = GetTurn(matrixSpiral);
+                    countTurn++;
+                }
+                else
+                {
+                    for (int i = 0; i < matrixSpiral.GetLength(1) - 1; i++)
+                    {
+                        int j = 0;
+                        matrixSpiral[j, i] = arraySS[i + sumCount];
+                        countArrayElement++;
+                    }
+                    sumCount = 0;
+                    sumCount = sumCount + countArrayElement;
+                    matrixSpiral = GetTurn(matrixSpiral);
+                    countTurn++;
+                }
+                
             }
             matrixSpiral = GetTurn(matrixSpiral);
-
-            for (int i = 0; i < matrixSpiral.GetLength(1); i++)
-            {
-                matrixSpiral[0, i] = arraySS[i + matrixSpiral.GetLength(1) - 1];
-            }
-
-            matrixSpiral = GetTurn(matrixSpiral);
-
-            for (int i = 0; i < matrixSpiral.GetLength(1); i++)
-            {
-                matrixSpiral[0, i] = arraySS[i + (matrixSpiral.GetLength(1) - 1) * 2];
-            }
-            matrixSpiral = GetTurn(matrixSpiral);
-
-            for (int i = 0; i < matrixSpiral.GetLength(1)-1; i++)
-            {
-                matrixSpiral[0, i] = arraySS[i + (matrixSpiral.GetLength(1) - 1) * 3];
-            }
-            matrixSpiral = GetTurn(matrixSpiral);
-
-            for (int i = 1; i < matrixSpiral.GetLength(1)-1; i++)
-            {
-                matrixSpiral[1, i] = arraySS[i - 1 + (matrixSpiral.GetLength(1) - 1) * 4];
-            }
-            matrixSpiral = GetTurn(matrixSpiral);
-
-            for (int i = 2; i < matrixSpiral.GetLength(1)-1; i++)
-            {
-                matrixSpiral[1, i] = arraySS[i + (matrixSpiral.GetLength(1) - 1) * 4];
-            }
-
-            matrixSpiral = GetTurn(matrixSpiral);
-
-            for (int i = 2; i < matrixSpiral.GetLength(1)-1; i++)
-            {
-                matrixSpiral[1, i] = arraySS[i + 1 + (matrixSpiral.GetLength(1) - 1) * 4];
-            }
-            matrixSpiral = GetTurn(GetTurn(matrixSpiral));
             return matrixSpiral;
         }
     }
