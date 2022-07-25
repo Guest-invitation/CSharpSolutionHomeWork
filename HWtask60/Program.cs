@@ -7,6 +7,8 @@
 // 12(0,0,0) 22(0,0,1)
 // 45(1,0,0) 53(1,0,1)
 
+using System.Collections.Generic;
+
 namespace GB.Task60
 {
     class Program
@@ -14,12 +16,29 @@ namespace GB.Task60
         static void Main(string[] asgs)
         {
             int[,,] matrix = new int[2, 2, 2];
-            FillMatrix(matrix);
+            List<int> list = new List<int>();
+            GetList(list);
+            // PrintList(list);
+            FillMatrix(matrix, list);
             Console.WriteLine("Сгенерирован трехмерный массив размера 2х2х2: ");
             PrintMatrix(matrix);
         }
 
-        public static int[,,] FillMatrix(int[,,] matrixF)
+        public static void GetList(List<int> list)
+        {
+            for (int i = 10; i < 100; i++)
+            {
+                list.Add(i);
+            }
+        }
+        public static void PrintList(List<int> list)
+        {
+            foreach (int number in list)
+            {
+                Console.WriteLine(number);
+            }
+        }
+        public static int[,,] FillMatrix(int[,,] matrixF, List<int> list)
         {
             for (int i = 0; i < matrixF.GetLength(0); i++)
             {
@@ -27,7 +46,9 @@ namespace GB.Task60
                 {
                     for (int k = 0; k < matrixF.GetLength(2); k++)
                     {
-                        matrixF[i, j, k] = new Random().Next(10, 100);
+                        int n = new Random().Next(0, list.Count);
+                        matrixF[i, j, k] = list[n];
+                        list.RemoveAt(n);
                     }
                 }
             }
