@@ -23,19 +23,25 @@ namespace GB.Task58
     {
         static void Main(string[] asgs)
         {
+            // Создаем 2 пустых массива одинакового размера
             int[,] matrixFirst = new int[4, 4];
             int[,] matrixSecond = new int[4, 4];
+            // Заполняяем каждый из них случайными числами
             FillMatrix(matrixFirst);
             FillMatrix(matrixSecond);
+            // Печатаем заполненные массивы в консоль
             Console.WriteLine("Сгенерирована первая матрица размера 4х4: ");
             PrintMatrix(matrixFirst);
             Console.WriteLine("Сгенерирована вторая матрица размера 4х4: ");
             PrintMatrix(matrixSecond);
+            // Создаем новый массив, в который мы запишем произведение двух первых
             int [,] matrixProduct = GetProductMatrix(matrixFirst, matrixSecond);
             Console.WriteLine();
+            // Печатаем массив произведения двух первых массивов
             PrintMatrix(matrixProduct);
         }
 
+        // Создаем метод, который заполянет массив
         public static int[,] FillMatrix(int[,] matrixF)
         {
             for (int i = 0; i < matrixF.GetLength(0); i++)
@@ -47,7 +53,7 @@ namespace GB.Task58
             }
             return matrixF;
         }
-
+        // Создаем метод, который печатает массив
         public static int[,] PrintMatrix(int[,] matrixP)
         {
             for (int i = 0; i < matrixP.GetLength(0); i++)
@@ -61,15 +67,19 @@ namespace GB.Task58
             return matrixP;
         }
 
+        // Создаем метод, который умножает 2 массива друг на друга
         public static int[,] GetProductMatrix(int[,] matrix1, int [,] matrix2)
         {
             for (int i = 0; i < matrix1.GetLength(0); i++)
             {
                 for (int j = 0; j < matrix1.GetLength(1); j++)
                 {
+                    // С помощью цикла пробегаемся по массиву и умножаем его значение
+                    // на значение на такой же позиции (с такими же индексами) у другого массива
                     matrix1[i,j] = matrix1[i,j] * matrix2[i,j];
                 }
             }
+            // Возвращаем перезаписанный первый массив
             return matrix1;
         }
     }
