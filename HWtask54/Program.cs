@@ -17,14 +17,20 @@ namespace GB.Task54
     {
         static void Main(string[] asgs)
         {
+            // Создаем пустой массив размера 3х4
             int[,] matrix = new int[3, 4];
+            // Обращаемся к методу, чтобы заполнить наш пустой массив
             FillMatrix(matrix);
+            // Печатаем заполненный массив
             PrintMatrix(matrix);
-            GetMatrixStructure(matrix);
+            // Передаем наш массив в метод, который отсортирует его и перезапишет
+            GetMatrixSort(matrix);
             Console.WriteLine();
+            // Печатаем массив
             PrintMatrix(matrix);
         }
 
+        // Создаем метод который заполнит массив случайными числами от 1 до 9
         public static int[,] FillMatrix(int[,] matrixF)
         {
             for (int i = 0; i < matrixF.GetLength(0); i++)
@@ -34,9 +40,11 @@ namespace GB.Task54
                     matrixF[i, j] = new Random().Next(1, 10);
                 }
             }
+            // Возвращаем массив
             return matrixF;
         }
 
+        // Создаем метод, который печатает массив
         public static int[,] PrintMatrix(int[,] matrixP)
         {
             for (int i = 0; i < matrixP.GetLength(0); i++)
@@ -45,18 +53,23 @@ namespace GB.Task54
                 {
                     Console.Write(matrixP[i, j] + " | ");
                 }
+                // Строяка перехода на новую строку
                 Console.WriteLine();
             }
+            // Возвращаем массив
             return matrixP;
         }
 
-        public static int[,] GetMatrixStructure(int[,] matrixS)
+        // Создаем метод, который сортирует наш массив по строчкам от мин к макс элементу
+        public static int[,] GetMatrixSort(int[,] matrixS)
         {
             for (int i = 0; i < matrixS.GetLength(0); i++)
             {
                 int min = matrixS[i, 0];
                 for (int j = 0; j < matrixS.GetLength(1); j++)
                 {
+                    // i строке массива мы берем j за минимальный индекс и потом циклом сравнимаем 
+                    // попарно элемент минимальный на данном этапе цикла со следующим по порядку
                     int minPos = j;
                     for (int jSecond = j + 1; jSecond < matrixS.GetLength(1); jSecond++)
                     {
@@ -65,11 +78,14 @@ namespace GB.Task54
                             minPos = jSecond;
                         }
                     }
+                    // после всех сравнений мы перезаписываем на позицию i,j на которой мы находимся
+                    // значение самого минимального элемента и приступаем к следующему элементу строки
                     int change = matrixS[i,minPos];
                     matrixS[i,minPos] = matrixS[i,j];
                     matrixS[i,j] = change;
                 }
             }
+            // Возвращаем отсортированный массив
             return matrixS;
         }
     }
