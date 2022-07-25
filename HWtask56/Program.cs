@@ -21,13 +21,13 @@ namespace GB.Task56
             PrintMatrix(matrix);
             int [] arraySum = new int [matrix.GetLength(0)];
             GetSumRow(matrix, arraySum);
-            Console.WriteLine();
             for(int i = 0; i < arraySum.Length; i++)
             {
                 Console.WriteLine($" Сумма элементов {i+1} строки равна {arraySum[i]}");
             }
             Console.WriteLine();
-            Console.WriteLine($"Минимальная сумма элементов находится на {GetMinSum(arraySum)+1} и равна {arraySum[GetMinSum(arraySum)]}");
+            Console.WriteLine("Минимальная сумма элементов находится на " 
+                            + $"{GetMinSum(arraySum)+1} строке и равна {arraySum[GetMinSum(arraySum)]}");
         }
 
         public static int[,] FillMatrix(int[,] matrixF)
